@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/api.js"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-gray-100 flex items-center justify-center min-h-screen font-sans"
+  >
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+      <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Login</h2>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1" for="username"
+          >Username</label
+        >
+        <input
+          id="username"
+          type="text"
+          placeholder="Enter username"
+          class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-gray-700 font-semibold mb-1" for="password"
+          >Password</label
+        >
+        <input
+          id="password"
+          type="password"
+          placeholder="Enter password"
+          class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <button
+        id="loginBtn"
+        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition font-semibold"
+      >
+        Login
+      </button>
+    </div>
+
+    <script>
+      $("#loginBtn").click(function () {
+        const username = $("#username").val().trim();
+        const password = $("#password").val().trim();
+
+        if (!username || !password) {
+          Swal.fire(
+            "Login gagal",
+            "Username dan password wajib diisi",
+            "warning",
+          );
+          return;
+        }
+
+        apiRequest("POST", "/login", { username, password })
+          .done(function (res) {
+            if (res.token) {
+              localStorage.setItem("token", res.token);
+              window.location.href = "dashboard.html";
+            } else {
+              Swal.fire("Login gagal", "Token tidak diterima", "error");
+            }
+          })
+          .fail(function (xhr) {
+            let msg = "Username atau password salah";
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+              msg = xhr.responseJSON.message;
+            }
+            Swal.fire("Login gagal", msg, "error");
+          });
+      });
+    </script>
+  </body>
+</html>
