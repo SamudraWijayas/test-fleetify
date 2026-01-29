@@ -12,7 +12,7 @@ import (
 func main() {
 	config.InitDB()
 
-	// migrate models
+	// Migrate Model
 	config.DB.AutoMigrate(
 		&models.User{},
 		&models.Supplier{},
