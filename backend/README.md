@@ -58,6 +58,10 @@ Server akan berjalan di `http://localhost:3000`.
 - `POST /register` - Registrasi user baru
 - `POST /login` - Login user
 
+User default untuk testing:
+Username: carrick
+Password: 123456
+
 ### Items (Memerlukan autentikasi)
 
 - `GET /items` - Mendapatkan daftar item
