@@ -25,13 +25,10 @@ Tidak ada setup khusus yang diperlukan. Pastikan backend API server sudah berjal
 
 ## Menjalankan Aplikasi
 
-Buka file `login.html` di web browser Anda, atau gunakan server lokal seperti:
-
-```
-python -m http.server 8000
-```
-
-Kemudian akses `http://localhost:8000/login.html`.
+Untuk membuka aplikasi frontend:
+1. Temukan file login.html di folder frontend.
+2. Klik kanan file `login.html` → pilih **Open in Browser**.  
+3. Browser akan menampilkan halaman login, dan kamu bisa lanjut ke dashboard atau pembelian setelah login.
 
 ## Struktur File
 
